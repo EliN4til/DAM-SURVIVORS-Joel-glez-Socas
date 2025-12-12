@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5da997c8a7d9634883699d45b992ffc, type: 3}
+  m_Name: Oleada_5
+  m_EditorClassIdentifier: Assembly-CSharp::DataOleada
+  TiempoEntreOleadas: 15
+  Segmentos:
+  - EnemyPrefab: {fileID: 54110791531147524, guid: 5bdc1e2fcc8a04764a7bc3498bd63d33, type: 3}
+    TotalEnemies: 8
+    SpawnRate: 5
+    InitialDelay: 0
+  - EnemyPrefab: {fileID: 54110791531147524, guid: 5bdc1e2fcc8a04764a7bc3498bd63d33, type: 3}
+    TotalEnemies: 8
+    SpawnRate: 5
+    InitialDelay: 45
+  - EnemyPrefab: {fileID: 54110791531147524, guid: 5bdc1e2fcc8a04764a7bc3498bd63d33, type: 3}
+    TotalEnemies: 8
+    SpawnRate: 5
+    InitialDelay: 90
+  - EnemyPrefab: {fileID: 3933589409467088773, guid: 84be3d6502fc38d8f8c9549e983ddb98, type: 3}
+    TotalEnemies: 10
+    SpawnRate: 1
+    InitialDelay: 0

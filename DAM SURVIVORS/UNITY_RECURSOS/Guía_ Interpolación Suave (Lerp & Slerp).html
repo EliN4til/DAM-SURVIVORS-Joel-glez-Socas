@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<!-- saved from url=(0125)https://www3.gobiernodecanarias.org/medusa/eforma/campus/pluginfile.php/12321885/mod_resource/content/1/Lerp%20y%20Slerp.html -->
+<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía: Interpolación Suave (Lerp &amp; Slerp)</title>
+    <script src="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/saved_resource"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/css2" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0d1117;
+            background-image: radial-gradient(circle at 1px 1px, #21262d 1px, transparent 0);
+            background-size: 2rem 2rem;
+            color: #c9d1d9;
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 0.75rem;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            border-color: #8b949e;
+        }
+        .card-title {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem; /* 20px */
+        }
+        .card-title svg {
+            margin-right: 0.75rem;
+            width: 1.5rem; /* 24px */
+            height: 1.5rem; /* 24px */
+            flex-shrink: 0;
+        }
+        .code-block {
+            background-color: #0d1117;
+            border: 1px solid #30363d;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .code-block pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        .copy-button {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            border-radius: 0.375rem;
+            padding: 0.25rem 0.5rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .copy-button:hover {
+            background-color: #30363d;
+            border-color: #8b949e;
+        }
+        .tip-box {
+            background-color: rgba(45, 129, 255, 0.1);
+            border-left: 4px solid #388bfd;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+        .warning-box {
+            background-color: rgba(248, 131, 89, 0.1);
+            border-left: 4px solid #f0883e;
+            padding: 1rem;
+            margin-top: 1rem;
+            border-radius: 0.25rem;
+        }
+    </style>
+<script type="text/javascript" src="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/piwik-eforma.js"></script><link rel="stylesheet" type="text/css" href="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/cookies.css"><script type="text/javascript" src="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/cookies.js"></script><script type="text/javascript" src="./Guía_ Interpolación Suave (Lerp &amp; Slerp)_files/cookies-html.js"></script><style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mt-3{margin-top:0.75rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.grid{display:grid}.max-w-2xl{max-width:42rem}.gap-8{gap:2rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.text-center{text-align:center}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.font-extrabold{font-weight:800}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219 / var(--tw-text-opacity, 1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175 / var(--tw-text-opacity, 1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128 / var(--tw-text-opacity, 1))}.text-green-400{--tw-text-opacity:1;color:rgb(74 222 128 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71 / var(--tw-text-opacity, 1))}.text-yellow-400{--tw-text-opacity:1;color:rgb(250 204 21 / var(--tw-text-opacity, 1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}@media (min-width: 640px){.sm\:p-6{padding:1.5rem}.sm\:text-5xl{font-size:3rem;line-height:1}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:p-8{padding:2rem}}</style><style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></head>
+<body class="antialiased">
+    <div class="container mx-auto p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-white">Guía: Interpolación Suave (Lerp &amp; Slerp)</h1>
+            <p class="text-lg text-gray-500 mt-4 max-w-2xl mx-auto">La técnica profesional para eliminar el movimiento y la rotación "robóticos".</p>
+        </header>
+
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Carta: Lerp -->
+            <div class="card p-6">
+                <h3 class="card-title text-blue-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 013 16.81V8.688zM12.75 8.688c0-.864.933-1.405 1.683-.977l7.108 4.062a1.125 1.125 0 010 1.953l-7.108 4.062A1.125 1.125 0 0112.75 16.81V8.688z"></path></svg>
+                    Movimiento Suave: `Vector3.Lerp`
+                </h3>
+                <p class="text-gray-400 mt-3"><b>Lerp</b> significa Interpolación Lineal. En lugar de teletransportar un objeto a un nuevo punto, `Lerp` lo mueve *hacia* ese punto un pequeño porcentaje cada frame, creando un efecto de aceleración y frenado suave.</p>
+                <div class="code-block mt-4">
+                    <pre><code class="language-csharp text-gray-300" id="code-lerp">// Ideal para suavizar el movimiento de una cámara
+public Transform objetivo;
+public float velocidadSuavizado = 5f;
+private Vector3 offset;
+
+void Start() {
+    offset = transform.position - objetivo.position;
+}
+
+void LateUpdate() {
+    Vector3 posDeseada = objetivo.position + offset;
+    // La magia está aquí:
+    transform.position = Vector3.Lerp(
+        transform.position, // A: Dónde estoy ahora
+        posDeseada,         // B: Dónde quiero estar
+        velocidadSuavizado * Time.deltaTime // t: Qué % del camino recorro este frame
+    );
+}</code></pre>
+                    <button class="copy-button" data-target="code-lerp">Copiar</button>
+                </div>
+            </div>
+
+            <!-- Carta: Slerp -->
+            <div class="card p-6">
+                <h3 class="card-title text-green-400">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 15l-6 6m0 0l-6-6m6 6V9a6 6 0 0112 0v3"></path></svg>
+                    Rotación Suave: `Quaternion.Slerp`
+                </h3>
+                <p class="text-gray-400 mt-3"><b>Slerp</b> significa Interpolación Esférica. Es la versión de `Lerp` pero para rotaciones. Gira un objeto suavemente desde su rotación actual hasta una rotación objetivo.</p>
+                <div class="code-block mt-4">
+                    <pre><code class="language-csharp text-gray-300" id="code-slerp">// Nuestra rotación de jugador usará esto
+public float velocidadRotacion = 10f;
+Vector3 direccionMovimiento; // (calculada desde el Input System)
+
+void Update() {
+    // ... código de movimiento ...
+
+    if (direccionMovimiento != Vector3.zero)
+    {
+        // 1. Calcular la rotación objetivo
+        Quaternion rotacionObjetivo = Quaternion.LookRotation(direccionMovimiento);
+        
+        // 2. Aplicar la rotación suave
+        transform.rotation = Quaternion.Slerp(
+            transform.rotation,    // A: Dónde estoy mirando ahora
+            rotacionObjetivo,      // B: Dónde quiero mirar
+            velocidadRotacion * Time.deltaTime // t: Qué % del giro hago este frame
+        );
+    }
+}</code></pre>
+                    <button class="copy-button" data-target="code-slerp">Copiar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-6 mt-8">
+            <h3 class="card-title text-yellow-400">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"></path></svg>
+                El Creador de Rotación: `Quaternion.LookRotation`
+            </h3>
+            <p class="text-gray-400 mt-4">Esta es la función que usamos para crear la "rotación objetivo" (`B`) en el ejemplo anterior. Es increíblemente simple y potente: le das un vector de dirección (un `Vector3`) y te devuelve la rotación (`Quaternion`) que mira en esa dirección.</p>
+            <div class="code-block mt-4">
+                <pre><code class="language-csharp text-gray-300" id="code-look">// Dirección (calculada desde el input, o restando posiciones)
+Vector3 direccion = new Vector3(0, 0, 1); // Mirar hacia "adelante" (Z positivo)
+
+// Crear la rotación
+Quaternion rotacionHaciaAdelante = Quaternion.LookRotation(direccion);</code></pre>
+                <button class="copy-button" data-target="code-look">Copiar</button>
+            </div>
+            <div class="warning-box">
+                <p><strong class="text-yellow-300">¡PELIGRO! El Vector Cero:</strong> `Quaternion.LookRotation` no sabe cómo "mirar" a la dirección `(0, 0, 0)`. Si le pasas este vector (lo que ocurre si el jugador no está pulsando ninguna tecla), el juego lanzará un error. Por eso en nuestro script de jugador **SIEMPRE** lo pondremos dentro de un `if (direccionMovimiento != Vector3.zero)`.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const copyButtons = document.querySelectorAll('.copy-button');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const codeElement = document.getElementById(targetId);
+                    if (codeElement) {
+                        const textToCopy = codeElement.innerText;
+                        const textArea = document.createElement('textarea');
+                        textArea.value = textToCopy;
+                        document.body.appendChild(textArea);
+                        textArea.select();
+                        try {
+                            document.execCommand('copy');
+                            const originalText = button.textContent;
+                            button.textContent = '¡Copiado!';
+                            button.style.backgroundColor = '#22c55e';
+                            setTimeout(() => { 
+                                button.textContent = originalText;
+                                button.style.backgroundColor = '';
+                             }, 2000);
+                        } catch (err) { console.error('Error al copiar: ', err); }
+                        document.body.removeChild(textArea);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body><app-ls-content ng-version="17.3.7"><template shadowrootmode="open"><!----><app-similar-tools _nghost-ng-c2697620354=""><!----><!----><!----></app-similar-tools><!----><!----><style>[_nghost-ng-c2697620354]{font-family:Open Sans,sans-serif;color:#121212}</style></template></app-ls-content></html>

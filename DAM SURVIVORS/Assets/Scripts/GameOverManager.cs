@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-/// <summary>
-/// Controla el menú de Game Over
-/// Se activa cuando el jugador muere
-/// </summary>
+// Controla el menú de Game Over
+// Se activa cuando el jugador muere
 public class GameOverManager : MonoBehaviour
 {
     public static GameOverManager Instancia { get; private set; }
@@ -37,9 +35,7 @@ public class GameOverManager : MonoBehaviour
         }
     }
     
-    /// <summary>
-    /// Muestra el menú de Game Over
-    /// </summary>
+    // Muestra el menú de Game Over
     public void MostrarGameOver(float tiempoSobrevivido)
     {
         Debug.Log($"MostrarGameOver llamado con tiempo: {tiempoSobrevivido} segundos");
@@ -73,9 +69,7 @@ public class GameOverManager : MonoBehaviour
         Debug.Log("Juego pausado (timeScale = 0)");
     }
     
-    /// <summary>
-    /// Botón: Volver al menú principal
-    /// </summary>
+    // Botón: Volver al menú principal
     public void VolverAlMenu()
     {
         // Resetear el time scale
@@ -85,9 +79,7 @@ public class GameOverManager : MonoBehaviour
         SceneManager.LoadScene("MainMenu"); 
     }
     
-    /// <summary>
-    /// Botón: Reintentar (opcional)
-    /// </summary>
+    // Botón: Reintentar (opcional)
     public void Reintentar()
     {
         // Resetear el time scale

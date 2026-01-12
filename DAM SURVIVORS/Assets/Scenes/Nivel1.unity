@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ab047a70797aa449c13789aacf0b1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemySpawner
-  radioSpawn: 10
+  radioGeneracion: 10
   jugador: {fileID: 695006229}
   oleadas:
   - {fileID: 11400000, guid: 28e5196f388906c8cb9398a21cc6af31, type: 2}
@@ -2868,8 +2868,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BarraVidaFlotante
   imagenBarraVida: {fileID: 2082078145}
-  playerStats: {fileID: 7882935609675520267}
-  offset: {x: 0, y: 2.5, z: 0}
+  estadisticasJugador: {fileID: 0}
+  desplazamiento: {x: 0, y: 2.5, z: 0}
   mirarCamara: 1
 --- !u!114 &1151860581
 MonoBehaviour:
@@ -3275,7 +3275,9 @@ MonoBehaviour:
   prefabVarita: {fileID: 6669116492123021918, guid: 162b042c030061dbbb113a26fe60868c, type: 3}
   prefabHacha: {fileID: 7898547952340890631, guid: afc26aa2539ffd24b8018c94a64b0646, type: 3}
   prefabRayo: {fileID: 4611010758058329038, guid: 1ea0e16fa0e627ef2ad733abc6a1ee24, type: 3}
-  prefabEscudo: {fileID: 0}
+  prefabEscudo: {fileID: 4987233467882330719, guid: 6880c36941cd45420ad3c320c98d2674, type: 3}
+  prefabBumeran: {fileID: 177288083027835209, guid: d00a7eed30d1469b7b2930c5cbaddb8a, type: 3}
+  prefabSlash: {fileID: 5282739202983798438, guid: 073cb520afba1ca969925a0f2d463582, type: 3}
 --- !u!4 &1425138903
 Transform:
   m_ObjectHideFlags: 0
@@ -3423,7 +3425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BarraExperiencia
   imagenBarraExp: {fileID: 1350641382}
   textoNivel: {fileID: 411332306}
-  playerLevel: {fileID: 695006250}
+  nivelJugador: {fileID: 0}
 --- !u!114 &1643495730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4573,18 +4575,37 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7665516678768867495, guid: deb938fa7b3daa547b841489ca00ed26, type: 3}
       insertIndex: -1
       addedObject: {fileID: 695006249}
+    - targetCorrespondingSourceObject: {fileID: 7665516678768867495, guid: deb938fa7b3daa547b841489ca00ed26, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7882935609675520273}
   m_SourcePrefab: {fileID: 100100000, guid: deb938fa7b3daa547b841489ca00ed26, type: 3}
---- !u!114 &7882935609675520267 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4999441496978797353, guid: deb938fa7b3daa547b841489ca00ed26, type: 3}
-  m_PrefabInstance: {fileID: 7882935609675520266}
+--- !u!54 &7882935609675520273
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 695006225}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fc8c1a84e810a5642ad88b3819a65bee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

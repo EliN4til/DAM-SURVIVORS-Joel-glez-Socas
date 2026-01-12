@@ -3,14 +3,14 @@ using System.Collections;
 
 public class CameraShake : MonoBehaviour
 {
-    public static CameraShake Instancia; // Antes Instance
+    public static CameraShake Instancia;
 
     private void Awake()
     {
         Instancia = this;
     }
 
-    public void Sacudir(float duracion, float magnitud) // Antes Shake
+    public void Sacudir(float duracion, float magnitud)
     {
         StartCoroutine(CorrutinaSacudida(duracion, magnitud));
     }

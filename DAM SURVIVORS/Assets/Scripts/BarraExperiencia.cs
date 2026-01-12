@@ -2,10 +2,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-/// <summary>
-/// Controla la barra de experiencia en la parte superior de la pantalla
-/// Muestra el progreso de experiencia y el nivel actual
-/// </summary>
+// Controla la barra de experiencia en la parte superior de la pantalla
+// Muestra el progreso de experiencia y el nivel actual
 public class BarraExperiencia : MonoBehaviour
 {
     [Header("Referencias")]

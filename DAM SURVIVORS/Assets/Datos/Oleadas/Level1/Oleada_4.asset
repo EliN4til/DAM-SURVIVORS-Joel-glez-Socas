@@ -21,15 +21,15 @@ MonoBehaviour:
   - EnemyPrefab: {fileID: 6030886757145972659, guid: bff8572c27f735a3287c08c16d8df683, type: 3}
     TotalEnemies: 15
     SpawnRate: 2
-    InitialDelay: 35
+    InitialDelay: 0
   - EnemyPrefab: {fileID: 6030886757145972659, guid: bff8572c27f735a3287c08c16d8df683, type: 3}
     TotalEnemies: 15
     SpawnRate: 2
-    InitialDelay: 70
+    InitialDelay: 0
   - EnemyPrefab: {fileID: 6030886757145972659, guid: bff8572c27f735a3287c08c16d8df683, type: 3}
     TotalEnemies: 15
     SpawnRate: 2
-    InitialDelay: 105
+    InitialDelay: 0
   - EnemyPrefab: {fileID: 54110791531147524, guid: 5bdc1e2fcc8a04764a7bc3498bd63d33, type: 3}
     TotalEnemies: 12
     SpawnRate: 10

@@ -21,4 +21,4 @@ MonoBehaviour:
   - EnemyPrefab: {fileID: 6030886757145972659, guid: bff8572c27f735a3287c08c16d8df683, type: 3}
     TotalEnemies: 12
     SpawnRate: 5
-    InitialDelay: 65
+    InitialDelay: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06642fa56caad424ca13b74c075087fc, type: 3}
   m_Name: EnemyStats_Zangano
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  health: 10
-  damage: 2
-  defense: 0
-  speed: 2
+  vida: 20
+  dano: 5
+  defensa: 0
+  velocidad: 2.5

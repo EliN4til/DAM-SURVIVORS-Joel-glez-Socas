@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06642fa56caad424ca13b74c075087fc, type: 3}
   m_Name: EnemyStats_Corredor
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  health: 20
-  damage: 4
-  defense: 0
-  speed: 4
+  vida: 40
+  dano: 8
+  defensa: 0
+  velocidad: 5.0

@@ -1,10 +1,9 @@
 using UnityEngine;
 using TMPro;
 
-/// <summary>
-/// Muestra el tiempo transcurrido en el nivel
-/// Formato: MM:SS
-/// </summary>
+
+// Muestra el tiempo transcurrido en el nivel
+// Formato: MM:SS
 public class TimerNivel : MonoBehaviour
 {
     [Header("Referencias")]
@@ -52,35 +51,31 @@ public class TimerNivel : MonoBehaviour
         textoTimer.text = string.Format("{0:00}:{1:00}", minutos, segundos);
     }
     
-    /// <summary>
-    /// Inicia el timer
-    /// </summary>
+    
+    // Inicia el timer
     public void IniciarTimer()
     {
         timerActivo = true;
         tiempoTranscurrido = 0f;
     }
     
-    /// <summary>
-    /// Pausa el timer
-    /// </summary>
+    
+    // Pausa el timer
     public void PausarTimer()
     {
         timerActivo = false;
     }
     
-    /// <summary>
-    /// Reinicia el timer a cero
-    /// </summary>
+    
+    // Reinicia el timer a cero
     public void ReiniciarTimer()
     {
         tiempoTranscurrido = 0f;
         ActualizarTexto();
     }
     
-    /// <summary>
-    /// Obtiene el tiempo transcurrido en segundos
-    /// </summary>
+    
+    // Obtiene el tiempo transcurrido en segundos
     public float ObtenerTiempo()
     {
         return tiempoTranscurrido;

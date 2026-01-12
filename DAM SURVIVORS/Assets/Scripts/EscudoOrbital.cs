@@ -131,36 +131,60 @@ public class EscudoOrbital : MonoBehaviour
 
     void CrearOrbes()
     {
-        if (orbePrefab == null || pivotTransform == null) return;
+        // Si no tenemos el prefab o el pivote, no podemos hacer nada
+        if (orbePrefab == null) return;
+        if (pivotTransform == null) return;
 
-        DestruirOrbes(); // Limpieza previa
+        DestruirOrbes(); // Borramos los anteriores primero
 
+        // Inicializamos el array para guardar los orbes
         orbes = new GameObject[numeroDeOrbes];
-        float anguloPaso = 360f / numeroDeOrbes; // Distribución equitativa
+        
+        // Calculamos cuántos grados hay de separación entre cada orbe
+        float gradosSeparacion = 360f / numeroDeOrbes;
 
         for (int i = 0; i < numeroDeOrbes; i++)
         {
-            float angulo = i * anguloPaso * Mathf.Deg2Rad;
-            Vector3 posLocal = new Vector3(Mathf.Sin(angulo) * radio, 0, Mathf.Cos(angulo) * radio);
-
-            // Crear orbe como hijo del pivote
-            GameObject orbe = Instantiate(orbePrefab, pivotTransform.position + posLocal, Quaternion.identity, pivotTransform);
-            orbe.transform.localPosition = posLocal;
-
-            // Añadir componente de daño
-            OrbeIndividual componenteOrbe = orbe.AddComponent<OrbeIndividual>();
+            // Calculamos el ángulo para este orbe específico
+            float anguloGrados = i * gradosSeparacion;
             
-            // Calcular daño según nivel (+20% por nivel extra)
-            float multiplicador = 1f + ((nivel - 1) * 0.2f);
-            componenteOrbe.dano = Mathf.RoundToInt(dano * multiplicador);
+            // Convertimos a radianes porque Unity usa radianes para Seno y Coseno
+            float anguloRadianes = anguloGrados * (Mathf.PI / 180f);
 
-            // Asegurar configuración física
-            Rigidbody rb = orbe.GetComponent<Rigidbody>();
-            if (rb == null) rb = orbe.AddComponent<Rigidbody>();
+            // Calculamos la posición X y Z usando trigonometría
+            float x = Mathf.Sin(anguloRadianes) * radio;
+            float z = Mathf.Cos(anguloRadianes) * radio;
+
+            Vector3 posicionLocal = new Vector3(x, 0, z);
+
+            // Creamos el orbe en la posición calculada
+            // Lo ponemos como hijo del 'pivotTransform' para que gire con él
+            GameObject nuevoOrbe = Instantiate(orbePrefab, pivotTransform);
+            nuevoOrbe.transform.localPosition = posicionLocal;
+
+            // Le añadimos el script para que haga daño
+            OrbeIndividual scriptDano = nuevoOrbe.AddComponent<OrbeIndividual>();
+            
+            // Calculamos el daño: Base + 20% por cada nivel extra
+            float bonoNivel = (nivel - 1) * 0.2f;
+            float danoTotal = dano * (1 + bonoNivel);
+            
+            // Asignamos el daño (redondeando a entero)
+            scriptDano.dano = Mathf.RoundToInt(danoTotal);
+
+            // Nos aseguramos de que tenga Rigidbody para las colisiones
+            Rigidbody rb = nuevoOrbe.GetComponent<Rigidbody>();
+            if (rb == null)
+            {
+                rb = nuevoOrbe.AddComponent<Rigidbody>();
+            }
+            
+            // Configuramos el Rigidbody para que no se caiga
             rb.useGravity = false;
             rb.isKinematic = true;
 
-            orbes[i] = orbe;
+            // Guardamos el orbe en nuestra lista
+            orbes[i] = nuevoOrbe;
         }
     }
 
@@ -181,6 +205,7 @@ public class EscudoOrbital : MonoBehaviour
         nivelAnterior = nivel;
         // Más velocidad y más orbes al subir de nivel
         velocidadRotacion = 90f + ((nivel - 1) * 30f);
+        // Base 3 orbes. +1 orbe cada 2 niveles (Nivel 2->4, Nivel 4->5...)
         numeroDeOrbes = 3 + (nivel / 2);
     }
 

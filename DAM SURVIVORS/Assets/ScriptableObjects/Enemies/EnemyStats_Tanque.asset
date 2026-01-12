@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06642fa56caad424ca13b74c075087fc, type: 3}
   m_Name: EnemyStats_Tanque
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
-  health: 100
-  damage: 10
-  defense: 5
-  speed: 1
+  vida: 100
+  dano: 15
+  defensa: 0
+  velocidad: 1.5

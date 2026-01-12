@@ -4,30 +4,26 @@ using UnityEngine;
 
 public class RayoLuz : MonoBehaviour
 {
-    public int dano = 2; // Antes damage (ya balanceado, DPS continuo)
-    public float tiempoVida = 3f; // Antes spawnLife
-    public float tiempoEntreDano = 0.25f; // Antes dotTime
+    public int dano = 2;
+    public float tiempoVida = 3f;
+    public float tiempoEntreDano = 0.25f;
     
     // Nivel del rayo
     public int nivel = 1;
 
     // --- Movimiento ---
-    // Distancia del centro del rayo al jugador
-    public float offsetAdelante = 6f; // Antes forwardOffset
-    // Velocidad de giro suavizado
-    public float velocidadRotacion = 5f; // Antes rotationSpeed
+    public float offsetAdelante = 6f;
+    public float velocidadRotacion = 5f;
 
-    private List<EnemyController> enemigosEnRayo = new List<EnemyController>(); // Antes enemiesInRay
-    private Transform transformJugador; // Antes playerTransform
+    private List<EnemyController> enemigosEnRayo = new List<EnemyController>();
+    private Transform transformJugador;
     private Rigidbody rb;
 
     void Awake()
     {
-        // Necesitamos un Rigidbody para que Unity detecte las colisiones Trigger
         rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            // Lo ponemos Kinematic para que no se caiga por gravedad ni le afecten choques físicos
             rb.useGravity = false;
             rb.isKinematic = true; 
         }
@@ -35,16 +31,12 @@ public class RayoLuz : MonoBehaviour
 
     void Start()
     {
-        // El rayo tiene fecha de caducidad: se destruye a los 'tiempoVida' segundos
         Destroy(gameObject, tiempoVida);
         
-        // Buscamos al jugador para saber a quién seguir
         GameObject jugador = GameObject.FindGameObjectWithTag("Player");
         if (jugador != null)
         {
             transformJugador = jugador.transform;
-            
-            // Truquito: Forzamos la posición inicial al instante para que no aparezca en el (0,0,0) y luego salte
             ActualizarTransform(100f); 
         }
 

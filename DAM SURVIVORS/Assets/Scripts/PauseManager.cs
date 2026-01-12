@@ -14,6 +14,12 @@ public class PauseManager : MonoBehaviour
         // Detectar tecla ESC para pausar/reanudar
         if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
         {
+            // Si el menú de Level Up está abierto, NO permitimos pausar ni reanudar (el Level Up tiene prioridad)
+            if (LevelUpManager.Instancia != null && LevelUpManager.Instancia.IsMenuOpen)
+            {
+                return;
+            }
+
             if (estaPausado)
             {
                 Reanudar();
@@ -27,26 +33,26 @@ public class PauseManager : MonoBehaviour
 
     public void Reanudar()
     {
-        Debug.Log("🟢 Reanudar juego");
+        Debug.Log("Reanudar juego");
         if (menuPausaUI != null) menuPausaUI.SetActive(false);
         
-        Time.timeScale = 1f; // Restaurar tiempo normal
+        Time.timeScale = 1f;
         estaPausado = false;
     }
 
     void Pausar()
     {
-        Debug.Log("⏸️ Pausar juego");
+        Debug.Log("Pausar juego");
         if (menuPausaUI != null) menuPausaUI.SetActive(true);
         
-        Time.timeScale = 0f; // Detener tiempo
+        Time.timeScale = 0f;
         estaPausado = true;
     }
 
     public void SalirDelJuego()
     {
-        Debug.Log("🚪 Saliendo al menú principal...");
-        Time.timeScale = 1f; // Asegurar que el tiempo vuelva a la normalidad antes de cambiar de escena
+        Debug.Log("Saliendo al menú principal...");
+        Time.timeScale = 1f;
         
         SceneManager.LoadScene("MainMenu"); 
     }

@@ -31,9 +31,7 @@ public class MovimientoJugador : MonoBehaviour
         ConfigurarNavMeshAgent();
     }
 
-    /// <summary>
-    /// Configura el NavMeshAgent con los valores correctos para el jugador
-    /// </summary>
+    // Configura el NavMeshAgent con los valores correctos para el jugador
     private void ConfigurarNavMeshAgent()
     {
         agente.speed = velocidadMovimiento;
@@ -93,9 +91,7 @@ public class MovimientoJugador : MonoBehaviour
     
     ///////////////////////////////////// FUNCIONES PROPIAS /////////////////////////////////
 
-    /// <summary>
-    /// Habilita o deshabilita el movimiento del jugador
-    /// </summary>
+    // Habilita o deshabilita el movimiento del jugador
     public void PermitirMovimiento(bool permitir)
     {
         puedeMoverse = permitir;

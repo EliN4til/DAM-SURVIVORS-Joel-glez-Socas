@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-/// <summary>
-/// Controla la barra de vida flotante sobre el jugador
-/// La barra sigue al jugador y siempre mira a la cámara
-/// </summary>
+// Controla la barra de vida flotante sobre el jugador
+// La barra sigue al jugador y siempre mira a la cámara
 public class BarraVidaFlotante : MonoBehaviour
 {
     [Header("Referencias")]
